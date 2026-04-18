@@ -10,7 +10,7 @@ The application follows a three-layer architecture:
 - Business Logic Layer: Contains the core models and business rules.
 - Persistence Layer: Manages data storage and retrieval.
 
-## 3.1 High-Level Package Diagram
+## 2.1 High-Level Package Diagram
 ```mermaid
 flowchart TD
     subgraph P[Presentation Layer]
@@ -51,7 +51,7 @@ flowchart TD
     Repo --queries--> E
 ```
 
-## 3.2 Layer Responsibilities
+## 2.2 Layer Responsibilities
 
 ### Presentation Layer
 Handles incoming requests from users via API endpoints and services. It forwards requests to the facade.
@@ -62,12 +62,12 @@ Contains the core entities (User, Place, Review, Amenity) and implements busines
 ### Persistence Layer
 Responsible for interacting with the database through repositories.
 
-## 3.2 Facade Pattern
+## 2.2 Facade Pattern
 The facade pattern provides a unified interface between the presentation and business logic layers.
 
 Instead of interacting directly with multiple components, the presentation layer communicates with a single facade, which simplifies the interaction and hides internal complexity.
 
-## 4. Detailed Class Diagram (Business Logic Layer)
+## 3. Detailed Class Diagram (Business Logic Layer)
 
 ### Overview
 
@@ -153,12 +153,12 @@ A Place belongs to one User, has multiple Reviews, and multiple Amenities
 A Review is associated with one User and one Place
 A Place and Amenity have a many-to-many relationship
 
-## 5. Sequence Diagrams for API Calls
+## 4. Sequence Diagrams for API Calls
 
 ### Overview
 This section presents sequence diagrams that illustrate how different API requests are processed in the HBnB Evolution application. Each diagram shows the interaction between the Presentation Layer, Business Logic Layer, and Persistence Layer.
 
-## 5.1 User Registration
+## 4.1 User Registration
 ```mermaid
 sequenceDiagram
 participant User
@@ -182,7 +182,7 @@ API-->>User: account created
 The user registration process involves validating user input, creating a new user entity, and storing it in the database.
 
 
-## 5.2 Place Creation
+## 4.2 Place Creation
 ```mermaid
 sequenceDiagram
 participant User
@@ -206,7 +206,7 @@ API-->>User: place created
 The place creation flow allows a user to create a new property listing which is then persisted in the system.
 
 
-## 5.3 Review Submission
+## 4.3 Review Submission
 ```mermaid
 sequenceDiagram
 participant User
@@ -230,7 +230,7 @@ API-->>User: review created
 A user can submit a review for a specific place. The review is validated and stored in the database.
 
 
-## 3.4 Fetch Places
+## 4.4 Fetch Places
 ```mermaid
 sequenceDiagram
 participant User
