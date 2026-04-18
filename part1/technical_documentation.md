@@ -152,3 +152,98 @@ A User can own multiple Places and write multiple Reviews
 A Place belongs to one User, has multiple Reviews, and multiple Amenities
 A Review is associated with one User and one Place
 A Place and Amenity have a many-to-many relationship
+
+## 5. Sequence Diagrams for API Calls
+
+### Overview
+This section presents sequence diagrams that illustrate how different API requests are processed in the HBnB Evolution application. Each diagram shows the interaction between the Presentation Layer, Business Logic Layer, and Persistence Layer.
+
+## 5.1 User Registration
+```mermaid
+sequenceDiagram
+participant User
+participant API
+participant Facade
+participant UserModel
+participant Repo
+participant DB
+
+User->>API: Register (name, email, password)
+API->>Facade: create_user(data)
+Facade->>UserModel: validate & create instance
+Facade->>Repo: save user
+Repo->>DB: INSERT user
+DB-->>Repo: success
+Repo-->>Facade: user saved
+Facade-->>API: success response
+API-->>User: account created
+```
+
+The user registration process involves validating user input, creating a new user entity, and storing it in the database.
+
+## 5.2 Place Creation
+```mermaid
+sequenceDiagram
+participant User
+participant API
+participant Facade
+participant PlaceModel
+participant Repo
+participant DB
+
+User->>API: Create Place (title, price, etc.)
+API->>Facade: create_place(data)
+Facade->>PlaceModel: validate & build place
+Facade->>Repo: save place
+Repo->>DB: INSERT place
+DB-->>Repo: success
+Repo-->>Facade: place saved
+Facade-->>API: response
+API-->>User: place created
+```
+
+The place creation flow allows a user to create a new property listing which is then persisted in the system.
+
+## 5.3 Review Submission
+```mermaid
+sequenceDiagram
+participant User
+participant API
+participant Facade
+participant ReviewModel
+participant Repo
+participant DB
+
+User->>API: Submit Review (rating, comment)
+API->>Facade: create_review(data)
+Facade->>ReviewModel: validate review
+Facade->>Repo: save review
+Repo->>DB: INSERT review
+DB-->>Repo: success
+Repo-->>Facade: review saved
+Facade-->>API: response
+API-->>User: review created
+```
+
+A user can submit a review for a specific place. The review is validated and stored in the database.
+
+## 3.4 Fetch Places
+```mermaid
+sequenceDiagram
+participant User
+participant API
+participant Facade
+participant Repo
+participant DB
+
+User->>API: Get places (filters)
+API->>Facade: get_places(filters)
+Facade->>Repo: query places
+Repo->>DB: SELECT places
+DB-->>Repo: data
+Repo-->>Facade: places list
+Facade-->>API: formatted response
+API-->>User: list of places
+```
+
+This flow retrieves a list of places based on optional filters provided by the user.
