@@ -66,3 +66,93 @@ Responsible for interacting with the database through repositories.
 The facade pattern provides a unified interface between the presentation and business logic layers.
 
 Instead of interacting directly with multiple components, the presentation layer communicates with a single facade, which simplifies the interaction and hides internal complexity.
+
+## 4. Detailed Class Diagram (Business Logic Layer)
+
+### Overview
+
+This section presents the detailed class diagram of the Business Logic Layer of the HBnB Evolution application. It defines the main entities of the system, their attributes, and the relationships between them. The diagram is designed using UML notation and implemented using Mermaid.js.
+
+### Class Diagram
+
+```mermaid
+classDiagram
+
+    class BaseModel {
+    +UUID id
+    +datetime created_at
+    +datetime updated_at
+    +save()
+    +update()
+    +delete()
+}
+
+    class User {
+        +string first_name
+        +string last_name
+        +string email
+        +string password
+        +bool is_admin
+    }
+
+    class Place {
+        +string title
+        +string description
+        +string price
+        +string location
+    }
+
+    class Review {
+        +int rating
+        +string comment
+    }
+
+    class Amenity {
+        +string name
+        +string description
+    }
+
+BaseModel <|-- User
+BaseModel <|-- Place
+BaseModel <|-- Review
+BaseModel <|-- Amenity
+
+User "1" --> "many" Place: owns
+User "1" --> "many" Review : writes
+Place "1" --> "many" Review : has
+Place "many" --> "many" Amenity : has
+
+Review --> Place
+Review --> User
+```
+
+### Entity Descriptions
+BaseModel
+
+Base class for all entities in the system. It provides common attributes such as a unique identifier and timestamps for creation and updates, as well as basic persistence-related methods.
+---------------------------------------
+
+User
+
+Represents a system user. A user can own multiple places and write multiple reviews. Users can also be identified as administrators using the is_admin attribute.
+---------------------------------------
+
+Place
+
+Represents a property listed in the system. Each place belongs to a user and can have multiple reviews and amenities associated with it.
+---------------------------------------
+
+Review
+
+Represents a user-generated review for a specific place. Each review includes a rating and a comment and is linked to both a user and a place.
+---------------------------------------
+
+Amenity
+
+Represents a feature or service available at a place (e.g., Wi-Fi, parking, pool). Amenities can be associated with multiple places.
+
+### Relationships Overview
+A User can own multiple Places and write multiple Reviews
+A Place belongs to one User, has multiple Reviews, and multiple Amenities
+A Review is associated with one User and one Place
+A Place and Amenity have a many-to-many relationship
