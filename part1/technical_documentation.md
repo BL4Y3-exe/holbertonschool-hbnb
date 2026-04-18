@@ -10,7 +10,7 @@ The application follows a three-layer architecture:
 - Business Logic Layer: Contains the core models and business rules.
 - Persistence Layer: Manages data storage and retrieval.
 
-## 3. High-Level Package Diagram
+## 3.1 High-Level Package Diagram
 ```mermaid
 flowchart TD
     subgraph P[Presentation Layer]
@@ -51,7 +51,7 @@ flowchart TD
     Repo --queries--> E
 ```
 
-## 4. Layer Responsibilities
+## 3.2 Layer Responsibilities
 
 ### Presentation Layer
 Handles incoming requests from users via API endpoints and services. It forwards requests to the facade.
@@ -62,7 +62,7 @@ Contains the core entities (User, Place, Review, Amenity) and implements busines
 ### Persistence Layer
 Responsible for interacting with the database through repositories.
 
-## 5. Facade Pattern
+## 3.2 Facade Pattern
 The facade pattern provides a unified interface between the presentation and business logic layers.
 
 Instead of interacting directly with multiple components, the presentation layer communicates with a single facade, which simplifies the interaction and hides internal complexity.
