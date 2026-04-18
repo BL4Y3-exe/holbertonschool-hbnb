@@ -181,6 +181,7 @@ API-->>User: account created
 
 The user registration process involves validating user input, creating a new user entity, and storing it in the database.
 
+
 ## 5.2 Place Creation
 ```mermaid
 sequenceDiagram
@@ -204,6 +205,7 @@ API-->>User: place created
 
 The place creation flow allows a user to create a new property listing which is then persisted in the system.
 
+
 ## 5.3 Review Submission
 ```mermaid
 sequenceDiagram
@@ -226,6 +228,7 @@ API-->>User: review created
 ```
 
 A user can submit a review for a specific place. The review is validated and stored in the database.
+
 
 ## 3.4 Fetch Places
 ```mermaid
