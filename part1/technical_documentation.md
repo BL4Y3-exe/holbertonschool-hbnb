@@ -130,22 +130,18 @@ Review --> User
 BaseModel
 
 Base class for all entities in the system. It provides common attributes such as a unique identifier and timestamps for creation and updates, as well as basic persistence-related methods.
----------------------------------------
 
 User
 
 Represents a system user. A user can own multiple places and write multiple reviews. Users can also be identified as administrators using the is_admin attribute.
----------------------------------------
 
 Place
 
 Represents a property listed in the system. Each place belongs to a user and can have multiple reviews and amenities associated with it.
----------------------------------------
 
 Review
 
 Represents a user-generated review for a specific place. Each review includes a rating and a comment and is linked to both a user and a place.
----------------------------------------
 
 Amenity
 
