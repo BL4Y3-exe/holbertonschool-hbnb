@@ -51,10 +51,12 @@ This documentation serves as a blueprint for the implementation phase of the pro
 ---
 
 ## 📁 Directory Structure
+
+```
 part1/
-|
 ├── technical_documentation.md
 └── README.md
+```
 
 ---
 
