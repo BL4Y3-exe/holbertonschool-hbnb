@@ -3,7 +3,7 @@ from app.models.user import User
 from app.models.amenity import Amenity
 from app.models.place import Place
 from app.models.user import User
-from app.models.amenity import Amenity
+from app.models.review import Review
 
 class HBnBFacade:
     def __init__(self):
@@ -37,9 +37,6 @@ class HBnBFacade:
 
         self.user_repo.update(user_id, user_data)
         return user
-
-    def get_place(self, place_id):
-        pass
 
 
     def create_amenity(self, amenity_data):
@@ -109,3 +106,64 @@ class HBnBFacade:
 
         self.place_repo.update(place_id, place_data)
         return place
+    
+
+    def create_review(self, review_data):
+        user = self.user_repo.get(review_data["user_id"])
+        place = self.place_repo.get(review_data["place_id"])
+
+        if not user or not place:
+            raise ValueError("User or Place not found")
+
+        if not (1 <= review_data["rating"] <= 5):
+            raise ValueError("Rating must be between 1 and 5")
+
+        review = Review(
+            text=review_data["text"],
+            rating=review_data["rating"],
+            user=user,
+            place=place
+        )
+
+        self.review_repo.add(review)
+
+        place.reviews.append(review)
+
+        return review
+
+
+    def get_review(self, review_id):
+        return self.review_repo.get(review_id)
+
+
+    def get_all_reviews(self):
+        return self.review_repo.get_all()
+
+
+    def get_reviews_by_place(self, place_id):
+        place = self.place_repo.get(place_id)
+        if not place:
+            return None
+        return place.reviews
+
+
+    def update_review(self, review_id, data):
+        review = self.review_repo.get(review_id)
+        if not review:
+            return None
+
+        if "rating" in data:
+            if not (1 <= data["rating"] <= 5):
+                raise ValueError("Rating must be 1-5")
+
+        self.review_repo.update(review_id, data)
+        return review
+
+
+    def delete_review(self, review_id):
+        review = self.review_repo.get(review_id)
+        if not review:
+            return False
+
+        self.review_repo.delete(review_id)
+        return True
