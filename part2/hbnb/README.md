@@ -61,14 +61,14 @@ Responsibilities:
 ---
 
 ## Project Structure
-`
+```
 app/
 ├── models/
 ├── services/
 ├── api/
 │ └── v1/
 ├── init.py
-`
+```
 
 ---
 
